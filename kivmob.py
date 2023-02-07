@@ -21,11 +21,11 @@ LayoutParams = autoclass('android.view.ViewGroup$LayoutParams')
 LinearLayout = autoclass('android.widget.LinearLayout')
 MobileAds = autoclass('com.google.android.gms.ads.MobileAds')
 RewardItem = autoclass('com.google.android.gms.ads.rewarded.RewardItem')
-RewardedVideoAd = autoclass('com.google.android.gms.ads.rewarded.RewardedVideoAd')
-RewardedVideoAdListener = autoclass('com.google.android.gms.ads.rewarded.RewardedVideoAdListener')
+#RewardedVideoAd = autoclass('com.google.android.gms.ads.rewarded.RewardedVideoAd')
+#RewardedVideoAdListener = autoclass('com.google.android.gms.ads.rewarded.RewardedVideoAdListener')
 View = autoclass('android.view.View')
 
-class AdMobRewardedVideoAdListener(PythonJavaClass):
+'''class AdMobRewardedVideoAdListener(PythonJavaClass):
     __javainterfaces__ = ('com.google.android.gms.ads.rewarded.RewardedVideoAdListener',)
     __javacontext__ = 'app'
 
@@ -73,7 +73,7 @@ class AdMobRewardedVideoAdListener(PythonJavaClass):
     @java_method('()V')
     def onRewardedVideoCompleted(self):
         Logger.info('KivMob: onRewardedVideoCompleted() called.')
-        self._listener.on_rewarded_video_ad_completed()
+        self._listener.on_rewarded_video_ad_completed()'''
 
 
 
