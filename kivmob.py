@@ -20,19 +20,19 @@ InterstitialAd = autoclass('com.google.android.gms.ads.interstitial.Interstitial
 LayoutParams = autoclass('android.view.ViewGroup$LayoutParams')
 LinearLayout = autoclass('android.widget.LinearLayout')
 MobileAds = autoclass('com.google.android.gms.ads.MobileAds')
-RewardItem = autoclass('com.google.android.gms.ads.reward.RewardItem')
-RewardedVideoAd = autoclass('com.google.android.gms.ads.reward.RewardedVideoAd')
-RewardedVideoAdListener = autoclass('com.google.android.gms.ads.reward.RewardedVideoAdListener')
+RewardItem = autoclass('com.google.android.gms.ads.rewarded.RewardItem')
+RewardedVideoAd = autoclass('com.google.android.gms.ads.rewarded.RewardedVideoAd')
+RewardedVideoAdListener = autoclass('com.google.android.gms.ads.rewarded.RewardedVideoAdListener')
 View = autoclass('android.view.View')
 
 class AdMobRewardedVideoAdListener(PythonJavaClass):
-    __javainterfaces__ = ('com.google.android.gms.ads.reward.RewardedVideoAdListener',)
+    __javainterfaces__ = ('com.google.android.gms.ads.rewarded.RewardedVideoAdListener',)
     __javacontext__ = 'app'
 
     def __init__(self, listener):
         self._listener = listener
 
-    @java_method('(Lcom/google/android/gms/ads/reward/RewardItem;)V')
+    @java_method('(Lcom/google/android/gms/ads/rewarded/RewardItem;)V')
     def onRewarded(self, reward):
         Logger.info('KivMob: onRewarded() called.')
         self._listener.on_rewarded(reward.getType(), reward.getAmount())
