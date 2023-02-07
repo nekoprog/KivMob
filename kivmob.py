@@ -7,7 +7,7 @@ from kivy.utils import platform
 from jnius import autoclass, cast, PythonJavaClass, java_method
 from android.runnable import run_on_ui_thread
 
-activity = autoclass('org.kivy.android.PythonActivity').mActivity
+activity = autoclass('org.kivy.android.PythonActivity')
 AdListener = autoclass('com.google.android.gms.ads.AdListener')
 AdMobAdapter = autoclass('com.google.ads.mediation.admob.AdMobAdapter')
 AdRequest = autoclass('com.google.android.gms.ads.AdRequest')
