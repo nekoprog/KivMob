@@ -4,88 +4,77 @@ from kivy.metrics import dp
 from kivy.utils import platform
 
 
-if platform != 'ios' or platform != 'macosx' or platform != 'win':
-    try:
-        from jnius import autoclass, cast, PythonJavaClass, java_method
-        from android.runnable import run_on_ui_thread
+from jnius import autoclass, cast, PythonJavaClass, java_method
+from android.runnable import run_on_ui_thread
 
-        activity = autoclass('org.kivy.android.PythonActivity')
-        AdListener = autoclass('com.google.android.gms.ads.AdListener')
-        AdMobAdapter = autoclass('com.google.ads.mediation.admob.AdMobAdapter')
-        AdRequest = autoclass('com.google.android.gms.ads.AdRequest')
-        AdRequestBuilder = autoclass('com.google.android.gms.ads.AdRequest$Builder')
-        AdSize = autoclass('com.google.android.gms.ads.AdSize')
-        AdView = autoclass('com.google.android.gms.ads.AdView')
-        Bundle = autoclass('android.os.Bundle')
-        Gravity = autoclass('android.view.Gravity')
-        InterstitialAd = autoclass('com.google.android.gms.ads.InterstitialAd')
-        LayoutParams = autoclass('android.view.ViewGroup$LayoutParams')
-        LinearLayout = autoclass('android.widget.LinearLayout')
-        MobileAds = autoclass('com.google.android.gms.ads.MobileAds')
-        RewardItem = autoclass('com.google.android.gms.ads.reward.RewardItem')
-        RewardedVideoAd = autoclass('com.google.android.gms.ads.reward.RewardedVideoAd')
-        RewardedVideoAdListener = autoclass('com.google.android.gms.ads.reward.RewardedVideoAdListener')
-        View = autoclass('android.view.View')
+activity = autoclass('org.kivy.android.PythonActivity').mActivity
+AdListener = autoclass('com.google.android.gms.ads.AdListener')
+AdMobAdapter = autoclass('com.google.ads.mediation.admob.AdMobAdapter')
+AdRequest = autoclass('com.google.android.gms.ads.AdRequest')
+AdRequestBuilder = autoclass('com.google.android.gms.ads.AdRequest$Builder')
+AdSize = autoclass('com.google.android.gms.ads.AdSize')
+AdView = autoclass('com.google.android.gms.ads.AdView')
+Bundle = autoclass('android.os.Bundle')
+Gravity = autoclass('android.view.Gravity')
+InterstitialAd = autoclass('com.google.android.gms.ads.InterstitialAd')
+LayoutParams = autoclass('android.view.ViewGroup$LayoutParams')
+LinearLayout = autoclass('android.widget.LinearLayout')
+MobileAds = autoclass('com.google.android.gms.ads.MobileAds')
+RewardItem = autoclass('com.google.android.gms.ads.reward.RewardItem')
+RewardedVideoAd = autoclass('com.google.android.gms.ads.reward.RewardedVideoAd')
+RewardedVideoAdListener = autoclass('com.google.android.gms.ads.reward.RewardedVideoAdListener')
+View = autoclass('android.view.View')
 
-        class AdMobRewardedVideoAdListener(PythonJavaClass):
-            __javainterfaces__ = ('com.google.android.gms.ads.reward.RewardedVideoAdListener',)
-            __javacontext__ = 'app'
+class AdMobRewardedVideoAdListener(PythonJavaClass):
+    __javainterfaces__ = ('com.google.android.gms.ads.reward.RewardedVideoAdListener',)
+    __javacontext__ = 'app'
 
-            def __init__(self, listener):
-                self._listener = listener
+    def __init__(self, listener):
+        self._listener = listener
 
-            @java_method('(Lcom/google/android/gms/ads/reward/RewardItem;)V')
-            def onRewarded(self, reward):
-                Logger.info('KivMob: onRewarded() called.')
-                self._listener.on_rewarded(reward.getType(), reward.getAmount())
+    @java_method('(Lcom/google/android/gms/ads/reward/RewardItem;)V')
+    def onRewarded(self, reward):
+        Logger.info('KivMob: onRewarded() called.')
+        self._listener.on_rewarded(reward.getType(), reward.getAmount())
 
-            @java_method('()V')
-            def onRewardedVideoAdLeftApplication(self):
-                Logger.info(
-                    'KivMob: onRewardedVideoAdLeftApplicaxtion() called.'
-                )
-                self._listener.on_rewarded_video_ad_left_application()
+    @java_method('()V')
+    def onRewardedVideoAdLeftApplication(self):
+        Logger.info(
+            'KivMob: onRewardedVideoAdLeftApplicaxtion() called.'
+        )
+        self._listener.on_rewarded_video_ad_left_application()
 
-            @java_method('()V')
-            def onRewardedVideoAdClosed(self):
-                Logger.info('KivMob: onRewardedVideoAdClosed() called.')
-                self._listener.on_rewarded_video_ad_closed()
+    @java_method('()V')
+    def onRewardedVideoAdClosed(self):
+        Logger.info('KivMob: onRewardedVideoAdClosed() called.')
+        self._listener.on_rewarded_video_ad_closed()
 
-            @java_method('(I)V')
-            def onRewardedVideoAdFailedToLoad(self, errorCode):
-                Logger.info('KivMob: onRewardedVideoAdFailedToLoad() called.')
-                # Logger.info('KivMob: ErrorCode ' + str(errorCode))
-                self._listener.on_rewarded_video_ad_failed_to_load(errorCode)
+    @java_method('(I)V')
+    def onRewardedVideoAdFailedToLoad(self, errorCode):
+        Logger.info('KivMob: onRewardedVideoAdFailedToLoad() called.')
+        # Logger.info('KivMob: ErrorCode ' + str(errorCode))
+        self._listener.on_rewarded_video_ad_failed_to_load(errorCode)
 
-            @java_method('()V')
-            def onRewardedVideoAdLoaded(self):
-                Logger.info('KivMob: onRewardedVideoAdLoaded() called.')
-                self._listener.on_rewarded_video_ad_loaded()
+    @java_method('()V')
+    def onRewardedVideoAdLoaded(self):
+        Logger.info('KivMob: onRewardedVideoAdLoaded() called.')
+        self._listener.on_rewarded_video_ad_loaded()
 
-            @java_method('()V')
-            def onRewardedVideoAdOpened(self):
-                Logger.info('KivMob: onRewardedVideoAdOpened() called.')
-                self._listener.on_rewarded_video_ad_opened()
+    @java_method('()V')
+    def onRewardedVideoAdOpened(self):
+        Logger.info('KivMob: onRewardedVideoAdOpened() called.')
+        self._listener.on_rewarded_video_ad_opened()
 
-            @java_method('()V')
-            def onRewardedVideoStarted(self):
-                Logger.info('KivMob: onRewardedVideoStarted() called.')
-                self._listener.on_rewarded_video_ad_started()
+    @java_method('()V')
+    def onRewardedVideoStarted(self):
+        Logger.info('KivMob: onRewardedVideoStarted() called.')
+        self._listener.on_rewarded_video_ad_started()
 
-            @java_method('()V')
-            def onRewardedVideoCompleted(self):
-                Logger.info('KivMob: onRewardedVideoCompleted() called.')
-                self._listener.on_rewarded_video_ad_completed()
+    @java_method('()V')
+    def onRewardedVideoCompleted(self):
+        Logger.info('KivMob: onRewardedVideoCompleted() called.')
+        self._listener.on_rewarded_video_ad_completed()
 
-    except BaseException:
-        Logger.error('KivMob: Cannot load AdMob classes. Check buildozer.spec.')
-        
-else:
-    class AdMobRewardedVideoAdListener:
-        pass
-
-    def run_on_ui_thread(x):
-        pass
 
 
 class TestIds:
