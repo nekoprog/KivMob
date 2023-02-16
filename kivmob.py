@@ -299,10 +299,13 @@ class AndroidBridge(AdMobBridge):
                 extras = Bundle()
                 extras.putBoolean('is_designed_for_families', options['family'])
                 builder.addNetworkExtrasBundle(AdMobAdapter, extras)
+        '''
         for test_device in self._test_devices:
             builder.addTestDevice(test_device)
+        '''
+        
         return builder
-
+        
 
 class iOSBridge(AdMobBridge):
     # TODO
@@ -317,7 +320,8 @@ class KivMob:
         Logger.info('KivMob: __init__ called.')
         self._banner_top_pos = True
         self.bridge = AndroidBridge(appID)
-        '''if platform == 'android':
+        '''
+        if platform == 'android':
             Logger.info('KivMob: Android platform detected.')
             self.bridge = AndroidBridge(appID)
         elif platform == 'ios':
@@ -325,7 +329,8 @@ class KivMob:
             self.bridge = iOSBridge(appID)
         else:
             Logger.warning('KivMob: Ads will not be shown.')
-            self.bridge = AdMobBridge(appID)'''
+            self.bridge = AdMobBridge(appID)
+        '''
 
     def add_test_device(self, device):
         ''' Add test device ID, which will trigger test ads to be displayed on
